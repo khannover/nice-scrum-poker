@@ -1,5 +1,11 @@
 from nicegui import app,ui,run
+import uuid
 
+ui.add_head_html('''<script>
+const userid = localStorage.getItem('userid') || Math.random().toString(36).substring(7);
+localStorage.setItem('userid', userid);
+</script>
+''')
 
 ui.add_css('''
 .flip-card {
@@ -151,19 +157,24 @@ with input_row:
 def add_card(number, color):
     app.storage.general["points"] += number
     app.storage.general["cards"] += 1
-
+    element_id = str(uuid.uuid4())
     with result_row:
+
         ui.html(f'''
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="https://robohash.org/foobar.png" alt="Avatar" style="width:200px;height:200px;">
+              <img id="{element_id}" src="" alt="Avatar" style="width:200px;height:200px;">
             </div>
             <div class="flip-card-back">
               {svg(number, color)}
             </div>
           </div>
         </div>
+        ''')
+
+        ui.run_javascript(f'''
+        document.getElementById("{element_id}").src = "https://robohash.org/" + localStorage.getItem('userid') + ".png";
         ''')
 
 # calulate the scrum points over all cards
