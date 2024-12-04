@@ -164,7 +164,7 @@ def add_card(number, color):
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img id="{element_id}" src="" alt="Avatar" style="width:200px;height:200px;">
+              <img id="{element_id}" src="https://robohash.org/{element_id}.png" alt="Avatar" style="width:200px;height:200px;">
             </div>
             <div class="flip-card-back">
               {svg(number, color)}
@@ -173,9 +173,7 @@ def add_card(number, color):
         </div>
         ''')
 
-        ui.run_javascript(f'''
-        document.getElementById("{element_id}").src = "https://robohash.org/" + localStorage.getItem('userid') + ".png";
-        ''')
+
 
 # calulate the scrum points over all cards
 def calculate_points():
