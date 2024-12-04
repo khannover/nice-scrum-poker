@@ -78,6 +78,32 @@ with input_row:
     <div class="flip-card">
       <div class="flip-card-inner2">
         <div class="flip-card-front">
+          {svg(0, '#fff')}
+        </div>
+        <div class="flip-card-back">
+          
+        </div>
+      </div>
+    </div>
+    ''').on("click", lambda: add_card(0, '#ffffff'))
+
+    ui.html(f'''
+    <div class="flip-card">
+      <div class="flip-card-inner2">
+        <div class="flip-card-front">
+          {svg("1/2", '#fff')}
+        </div>
+        <div class="flip-card-back">
+          
+        </div>
+      </div>
+    </div>
+    ''').on("click", lambda: add_card(0.5, '#ffffff'))
+
+    ui.html(f'''
+    <div class="flip-card">
+      <div class="flip-card-inner2">
+        <div class="flip-card-front">
           {svg(1, '#fff')}
         </div>
         <div class="flip-card-back">
@@ -184,8 +210,11 @@ def calculate_points():
         average = app.storage.general["points"] / app.storage.general["cards"]
     except ZeroDivisionError:
         average = 0
-
-    if average <= 1:
+    if average == 0:
+        recommendation = 0
+    elif average <= 0.5:
+        recommendation = 0.5
+    elif average <= 1:
         recommendation = 1
     elif average <= 2:
         recommendation = 2
