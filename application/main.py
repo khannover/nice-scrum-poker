@@ -70,7 +70,7 @@ with ui.row():
 ui.label("Karten auswählen:").classes("text-2xl font-bold text-center p-2")
 input_row = ui.row().classes("w-full")
 ui.separator()
-ui.label("Ergebnis:").classes("text-2xl font-bold text-center p-2")
+label_row = ui.row().classes("w-full")
 result_row = ui.row().classes("w-full")
 
 with input_row:
@@ -229,9 +229,15 @@ def calculate_points():
     else:
         recommendation = 20
 
-    with result_row:
+    with label_row:
+        ui.icon("🛑").classes("text-2xl font-bold text-center p-2")
         ui.label(f'Empfehlung: {recommendation}').classes("text-2xl font-bold text-center p-2")
 
+
+with label_row:
+    ui.label("Ergebnis:").classes("text-2xl font-bold text-center p-2")
+    ui.label().bind_text_from(app.storage.general, "cards").classes("text-2xl font-bold text-center p-2")
+    ui.label("Karten").classes("text-2xl font-bold text-center p-2")
 
 def clear_cards():
     reveal_btn.classes(remove="hidden")
