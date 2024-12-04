@@ -4,8 +4,8 @@ from nicegui import app,ui,run
 ui.add_css('''
 .flip-card {
   background-color: transparent;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   perspective: 1000px;
 }
 
@@ -44,8 +44,8 @@ ui.add_css('''
 
 def svg(number, color='#f7f7f7'):
     return f'''
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
-  <rect x="0" y="0" width="300" height="300" fill="{color}" stroke="#000" stroke-width="3" rx="0" />
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect x="0" y="0" width="200" height="200" fill="{color}" stroke="#000" stroke-width="3" rx="0" />
   <text x="50%" y="60%" text-anchor="middle" font-family="Arial, sans-serif" font-size="80" fill="#000">
     {number}
   </text>
@@ -157,7 +157,7 @@ def add_card(number, color):
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="https://robohash.org/foobar.png" alt="Avatar" style="width:300px;height:300px;">
+              <img src="https://robohash.org/foobar.png" alt="Avatar" style="width:200px;height:200px;">
             </div>
             <div class="flip-card-back">
               {svg(number, color)}
@@ -171,7 +171,11 @@ def calculate_points():
     reveal_btn.classes(add="hidden")
     recommendation = ""
     # round up to next fibonacci number
-    average = app.storage.general["points"] / app.storage.general["cards"]
+    try:
+        average = app.storage.general["points"] / app.storage.general["cards"]
+    except ZeroDivisionError:
+        average = 0
+
     if average <= 1:
         recommendation = 1
     elif average <= 2:
