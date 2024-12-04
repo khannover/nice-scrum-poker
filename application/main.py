@@ -201,8 +201,9 @@ app.storage.general["points"] = 0
 app.storage.general["cards"] = 0
 
 ui.run(
-    port=20000,
+    port=9999,
     dark=True,
     storage_secret='my_secret',
-    title='Nice Scrum Poker'
+    title='Nice Scrum Poker',
+    favicon="♠️",
 )
