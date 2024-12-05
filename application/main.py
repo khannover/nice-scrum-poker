@@ -203,6 +203,7 @@ def add_card(number, color):
 
 # calulate the scrum points over all cards
 def calculate_points():
+    label_row.clear()
     reveal_btn.classes(add="hidden")
     recommendation = ""
     # round up to next fibonacci number
@@ -230,6 +231,9 @@ def calculate_points():
         recommendation = 20
 
     with label_row:
+        ui.label("Ergebnis:").classes("text-2xl font-bold text-center p-2")
+        ui.label().bind_text_from(app.storage.general, "cards").classes("text-2xl font-bold text-center p-2")
+        ui.label("Karten").classes("text-2xl font-bold text-center p-2")
         ui.icon("🛑").classes("text-2xl font-bold text-center p-2")
         ui.label(f'Empfehlung: {recommendation}').classes("text-2xl font-bold text-center p-2")
 
