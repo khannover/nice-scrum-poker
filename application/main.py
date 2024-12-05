@@ -248,6 +248,11 @@ def clear_cards():
     result_row.clear()
     app.storage.general["points"] = 0
     app.storage.general["cards"] = 0
+    label_row.clear()
+    with label_row:
+        ui.label("Ergebnis:").classes("text-2xl font-bold text-center p-2")
+        ui.label().bind_text_from(app.storage.general, "cards").classes("text-2xl font-bold text-center p-2")
+        ui.label("Karten").classes("text-2xl font-bold text-center p-2")
 
 app.storage.general["points"] = 0
 app.storage.general["cards"] = 0
